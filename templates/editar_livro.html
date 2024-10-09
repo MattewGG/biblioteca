@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalhes do Livro</h1>
+        
+        <p><strong>ID:</strong> {{ livro.id }}</p>
+        <p><strong>Título:</strong> {{ livro.titulo }}</p>
+        <p><strong>Autor:</strong> {{ livro.autor }}</p>
+        <p><strong>Ano de Publicação:</strong> {{ livro.ano_publicacao }}</p>
+
+        <!-- Formulário de edição do livro -->
+        <h2>Editar Livro</h2>
+        <form action="{{ url_for('editar_livro', id=livro.id) }}" method="POST">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" value="{{ livro.titulo }}" required>
+            <br>
+            <label for="autor">Autor:</label>
+            <input type="text" id="autor" name="autor" value="{{ livro.autor }}" required>
+            <br>
+            <label for="ano_publicacao">Ano de Publicação:</label>
+            <input type="number" id="ano_publicacao" name="ano_publicacao" value="{{ livro.ano_publicacao }}" required>
+            <br>
+            <button type="submit" class="btn editar">Salvar Alterações</button>
+        </form>
+
+        <!-- Botão para excluir o livro -->
+        <form action="{{ url_for('deletar_livro', id=livro.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn deletar">Deletar Livro</button>
+        </form>
+
+        <!-- Botão para voltar à lista de livros -->
+        <a href="{{ url_for('index') }}" class="btn">Voltar à lista</a>
+    </div>
+</body>
+</html>
